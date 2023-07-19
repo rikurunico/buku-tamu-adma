@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('BukuTamu', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('no_hp')->nullable();
-            $table->string('alamat')->nullable();
-            $table->string('keperluan')->nullable();
+            $table->string('no_hp');
+            $table->string('alamat');
+            $table->string('keperluan');
             $table->timestamps();
         });
     }

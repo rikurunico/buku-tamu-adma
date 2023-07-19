@@ -16,7 +16,7 @@ class AuthController extends Controller
         $credentials = $request->only(['username', 'password']);
 
         if (auth()->attempt($credentials)) {
-            return redirect()->route('home');
+            return redirect()->route('homepage');
         }
 
         return redirect()->back()->with('error', 'Username atau Password salah');
@@ -26,6 +26,6 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return redirect()->route('login');
+        return redirect()->route('homepage');
     }
 }
