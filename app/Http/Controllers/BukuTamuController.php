@@ -65,7 +65,7 @@ class BukuTamuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BukuTamu $bukuTamu)
+    public function update(BukuTamuRequest $request, BukuTamu $bukuTamu)
     {
         if ($bukuTamu) {
             $bukuTamu->update($request->all());
