@@ -25,6 +25,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/home', [AuthController::class, 'home'])->name('home');
+    Route::view('/', 'homepage')->name('home');
     Route::resource('buku-tamu', BukuTamuController::class);
+    Route::post('/buku-tamu/store', [BukuTamuController::class, 'store'])->name('storeBukuTamu');
 });

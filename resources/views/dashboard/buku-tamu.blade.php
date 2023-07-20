@@ -8,9 +8,6 @@
             <h1>Manage Data Buku Tamu</h1>
         </div>
         <div class="section-body">
-            <div class="mb-3">
-                <button class="btn btn-primary" id="addButton" data-toggle="modal" data-target="#editModal">Add</button>
-            </div>
             <div class="table-responsive">
                 {!! $dataTable->table([
                     'class' => 'table table-hover',
@@ -73,6 +70,9 @@
 @push('custom-js')
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+    <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+    <script src="/vendor/datatables/buttons.server-side.js"></script>
     <script>
         $(document).ready(function() {
             const formAddData = $('#form-add-data');
@@ -80,62 +80,6 @@
             const editModal = $('#editModal');
             const saveButton = $('.saveButton');
             const bukutamuTable = $('#bukutamu-table');
-
-            // Add button click event
-            $('#addButton').click(function() {
-                formAddData[0].reset();
-                $('.modal-title').html('Tambahkan Peserta');
-                editModal.modal('show');
-                saveButton.attr('id', 'addData').html('Tambah Data');
-            });
-
-            // CREATE DATA
-            $(document).on('click', '#addData', function(e) {
-                e.preventDefault();
-                formAddData.append('<input type="hidden" name="_method" value="POST">');
-                const formTambahData = new FormData(formAddData[0]);
-
-                $.ajax({
-                    url: '{{ route('buku-tamu.store') }}',
-                    type: 'POST',
-                    data: formTambahData,
-                    dataType: 'json',
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        if (response.message === 'Validation errors') {
-                            $.each(response.data, function(key, value) {
-                                iziToast.error(value);
-                            });
-                        } else {
-                            if (response.success) {
-                                editModal.modal('hide');
-                                formAddData[0].reset();
-                                editForm.remove('input[name=_method]');
-                                editForm.attr('action', '').attr('method', '');
-                                saveButton.removeAttr('id');
-
-                                bukutamuTable.DataTable().ajax.reload();
-                                iziToast.success({
-                                    title: 'Success',
-                                    message: response.message,
-                                    position: 'topRight',
-                                });
-                            } else {
-                                iziToast.error({
-                                    title: 'Error',
-                                    message: response.message,
-                                    position: 'topRight',
-                                });
-                            }
-                        }
-                    },
-                    error: function(xhr) {
-                        // Handle errors
-                        handleAjaxErrors(xhr);
-                    }
-                });
-            });
 
             // Edit button click event
             $(document).on('click', '.btn-edit', function() {

@@ -32,7 +32,7 @@ class BukuTamuController extends Controller
     {
         return response()->json([
             'message' => 'Berhasil menambahkan data buku tamu.',
-            // 'data' => BukuTamu::create($request->validated()),
+            'data' => BukuTamu::create($request->validated()),
         ]);
     }
 
