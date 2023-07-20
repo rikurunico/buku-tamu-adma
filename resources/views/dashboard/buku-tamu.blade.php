@@ -81,9 +81,6 @@
                 const url = $(this).data('url');
                 const id = $(this).data('id');
 
-                console.log(url);
-                console.log(id);
-
                 editForm.attr('action', url).attr('method', 'POST');
                 $('.modal-title').html('Edit Peserta');
                 saveButton.attr('id', 'editData').html('Edit');
