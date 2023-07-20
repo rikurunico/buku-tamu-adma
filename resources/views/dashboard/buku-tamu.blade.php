@@ -28,31 +28,26 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{-- <form id="editForm" action="" method="POST"> --}}
                     <form id="form-add-data">
                         @csrf
-                        <!-- Form fields for 'nomor', 'nama', 'alamat', 'delegasi_kafilah', 'nomor_hp' -->
-                        <div class="form-group">
-                            <label for="nomor">Nomor</label>
-                            <input type="text" class="form-control" id="nomor" name="nomor">
-                        </div>
                         <div class="form-group">
                             <label for="nama">Nama</label>
                             <input type="text" class="form-control" id="nama" name="nama">
+                        </div>
+                        <div class="form-group">
+                            <label for="no_hp">Nomor HP</label>
+                            <input type="number" class="form-control" id="no_hp" name="no_hp">
+                            <small class="text-muted">Mulai dengan 08</small>
                         </div>
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
                             <input type="text" class="form-control" id="alamat" name="alamat">
                         </div>
                         <div class="form-group">
-                            <label for="delegasi_kafilah">Delegasi Kafilah</label>
-                            <input type="text" class="form-control" id="delegasi_kafilah" name="delegasi_kafilah">
+                            <label for="keperluan">Keperluan</label>
+                            <textarea name="keperluan" id="keperluan" class="form-control" cols="30" rows="5"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="nomor_hp">Nomor HP</label>
-                            <input type="number" class="form-control" id="nomor_hp" name="nomor_hp">
-                        </div>
-                        <button type="submit" class="btn btn-primary saveButton" id="">Save Changes</button>
+                        <button type="submit" class="btn btn-primary saveButton">Save Changes</button>
                     </form>
                 </div>
             </div>
@@ -86,6 +81,9 @@
                 const url = $(this).data('url');
                 const id = $(this).data('id');
 
+                console.log(url);
+                console.log(id);
+
                 editForm.attr('action', url).attr('method', 'POST');
                 $('.modal-title').html('Edit Peserta');
                 saveButton.attr('id', 'editData').html('Edit');
@@ -95,7 +93,10 @@
                 $.get(url, function(data) {
                     if (data.success) {
                         $('#id').val(data.data.id);
-                        // Populate other fields here...
+                        $('#nama').val(data.data.nama);
+                        $('#no_hp').val(data.data.no_hp);
+                        $('#alamat').val(data.data.alamat);
+                        $('#keperluan').val(data.data.keperluan);
                         editModal.modal('show');
                     } else {
                         iziToast.error({

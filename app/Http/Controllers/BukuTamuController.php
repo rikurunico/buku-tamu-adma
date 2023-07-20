@@ -41,7 +41,17 @@ class BukuTamuController extends Controller
      */
     public function show(BukuTamu $bukuTamu)
     {
-        //
+        if ($bukuTamu) {
+            return response()->json([
+                'success' => true,
+                'data' => $bukuTamu
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menemukan data buku tamu.'
+            ]);
+        }
     }
 
     /**
@@ -57,7 +67,20 @@ class BukuTamuController extends Controller
      */
     public function update(Request $request, BukuTamu $bukuTamu)
     {
-        //
+        if ($bukuTamu) {
+            $bukuTamu->update($request->all());
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil mengubah data buku tamu.',
+                'data' => $bukuTamu
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menemukan data buku tamu.'
+            ]);
+        }
     }
 
     /**
@@ -65,6 +88,18 @@ class BukuTamuController extends Controller
      */
     public function destroy(BukuTamu $bukuTamu)
     {
-        //
+        if ($bukuTamu) {
+            $bukuTamu->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil menghapus data buku tamu.'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menemukan data buku tamu.'
+            ]);
+        }
     }
 }

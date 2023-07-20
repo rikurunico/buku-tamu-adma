@@ -25,8 +25,8 @@ class BukuTamuDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($row) {
                 $buttons = '
-            <a href="javascript:void(0)" class="dropdown-item btn-edit" data-url="' . route('buku-tamu.show', $row) . '" data-id="' . $row->id_santri  . '"><i class="fas fa-edit"></i> Edit</a>
-            <a href="javascript:void(0)" class="dropdown-item btn-delete" data-url="' . route('buku-tamu.destroy', $row) . '" data-id="' . $row->id_santri  . '"><i class="fas fa-trash"></i> Delete</a>
+            <a href="javascript:void(0)" class="dropdown-item btn-edit" data-url="' . route('buku-tamu.show', $row) . '" data-id="' . $row->id  . '"><i class="fas fa-edit"></i> Edit</a>
+            <a href="javascript:void(0)" class="dropdown-item btn-delete" data-url="' . route('buku-tamu.destroy', $row) . '" data-id="' . $row->id  . '"><i class="fas fa-trash"></i> Delete</a>
         ';
 
                 return '
@@ -114,8 +114,7 @@ class BukuTamuDataTable extends DataTable
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
-                ->addClass('text-center')
-                ,
+                ->addClass('text-center'),
         ];
     }
 
